@@ -1,9 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import Page1 from './components/Page1';
-import Page2 from './components/Page2';
-import Page3 from './components/Page3';
 import Button from './components/Button';
+import asyncComponent from './components/AsyncComponent'
+
+
+const Page2 = asyncComponent(() => import('./components/Page2'));
+const Page3 = asyncComponent(() => import('./components/Page3'));
 
 class App extends Component {
   constructor(props) {
@@ -15,15 +18,12 @@ class App extends Component {
   }
 
   onChangePage = (pageNumber) => {
-    console.log(pageNumber);
     this.setState({ route: `page${pageNumber}` })
   }
 
   render() {
 
     const { route } = this.state;
-
-
     return (
       <Fragment>
         <header className="header">
