@@ -1,12 +1,13 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, Suspense } from 'react';
 import './App.css';
 import Page1 from './components/Page1';
 import Button from './components/Button';
-import asyncComponent from './components/AsyncComponent'
 
 
-const Page2 = asyncComponent(() => import('./components/Page2'));
-const Page3 = asyncComponent(() => import('./components/Page3'));
+
+const Page2 = React.lazy(() => import('./components/Page2'));
+const Page3 = React.lazy(() => import('./components/Page3'));
+
 
 class App extends Component {
   constructor(props) {
@@ -33,8 +34,16 @@ class App extends Component {
         </header>
         <div className="App" >
           {(route === 'page1') ? <Page1 /> : null}
-          {(route === 'page2') ? <Page2 /> : null}
-          {(route === 'page3') ? <Page3 /> : null}
+          {(route === 'page2') ? (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Page2 />
+            </Suspense>
+          ) : null}
+          {(route === 'page3') ? (
+            <Suspense fallback={<div>Loading...</div>}>
+              <Page3 />
+            </Suspense>
+          ) : null}
 
         </div>
       </Fragment>
