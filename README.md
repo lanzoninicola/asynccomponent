@@ -11,7 +11,6 @@ It contains the code using an HoC called "asynccomponent"
 
 It contains the code using the React.lazy function.
 
-Thanks to React.lazy function it is not necessary build a specific HoC, the component is automatically returned and it must be wrapped by the "Suspense" component provided by React library.
+Thanks to React.lazy function it's not necessary build a specific HoC, the component is automatically returned and it must be wrapped by the "Suspense" component provided by React library.
 
 const componentToRenderWhenNeeded = React.lazy(() => import('./components/componentToRenderWhenNeeded'));
-
